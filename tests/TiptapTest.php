@@ -19,7 +19,7 @@ class TiptapTest extends TestCase
         $this->assertTrue($tiptap->getDocument()->firstChild()->type() === NodeType::Paragraph);
     }
 
-    public function testTiptapFromJsonContentToRawText()
+    public function testContentToRawText()
     {
         $tiptap = Tiptap::fromContent('{"type":"doc","content":[{"type":"paragraph","attrs":{"textAlign":"left"},"content":[{"text":"probably?","type":"text"}]}]}');
 
@@ -29,7 +29,7 @@ class TiptapTest extends TestCase
         $this->assertEquals('probably?', $text);
     }
 
-    public function testTiptapFromJsonContentToRawTextHavingNestedNodes()
+    public function testNestedContentToRawText()
     {
         $tiptap = Tiptap::fromContent('{"type":"doc","content":[{"type":"heading","attrs":{"level":1,"textAlign":"left"},"content":[{"type":"glossaryItem","attrs":{"id":"4","type":"glossary","label":"MTE"}},{"text":" ","type":"text"}]},{"type":"paragraph","attrs":{"textAlign":"left"},"content":[{"text":"probably?","type":"text"}]}]}');
 

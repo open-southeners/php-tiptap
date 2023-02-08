@@ -2,18 +2,19 @@
 
 namespace OpenSoutheners\Tiptap;
 
-use function OpenSoutheners\LaravelHelpers\Strings\is_json;
 use Exception;
+use function OpenSoutheners\LaravelHelpers\Strings\is_json;
 use Throwable;
 
-class Node
+class Node implements \Iterator
 {
     public function __construct(
-        protected NodeType|string $type = NodeType::Paragraph, 
-        protected array $content = [], 
-        protected array $attributes = []
+        protected NodeType|string $type = NodeType::Paragraph,
+        protected array $content = [],
+        protected array $attributes = [],
+        private int $position = 0
     ) {
-        // 
+        //
     }
 
     public static function fromString(string $value): static
@@ -49,7 +50,7 @@ class Node
         $content = $value['content'] ?? $value['text'] ?? [];
 
         if (is_array($content) && is_array(reset($content))) {
-            for ($i=0; $i < count($content); $i++) { 
+            for ($i = 0; $i < count($content); $i++) {
                 $content[$i] = static::fromArray($content[$i]);
             }
         }
@@ -91,7 +92,7 @@ class Node
     {
         return $this->type;
     }
-    
+
     /**
      * Get node content.
      */
@@ -117,7 +118,7 @@ class Node
 
         return $textContent;
     }
-    
+
     /**
      * Get node attributes.
      */
@@ -159,5 +160,45 @@ class Node
         }
 
         return $this;
+    }
+
+    /**
+     * Returns the current element.
+     */
+    public function current(): static
+    {
+        return $this->content[$this->position];
+    }
+
+    /**
+     * Returns the key of the current element.
+     */
+    public function key(): int
+    {
+        return $this->position;
+    }
+
+    /**
+     * Move forward to next element.
+     */
+    public function next(): void
+    {
+        $this->position++;
+    }
+
+    /**
+     * Rewind the Iterator to the first element.
+     */
+    public function rewind(): void
+    {
+        $this->position = 0;
+    }
+
+    /**
+     * Checks if current position is valid.
+     */
+    public function valid(): bool
+    {
+        return isset($this->content[$this->position]);
     }
 }

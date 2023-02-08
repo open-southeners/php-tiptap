@@ -8,12 +8,30 @@ class Tiptap
 {
     public function __construct(protected Node $document)
     {
-        // 
+        //
     }
 
     public function getDocument(): Node
     {
         return $this->document;
+    }
+
+    public function countByNodeType()
+    {
+        $count = [];
+
+        /** @var \OpenSoutheners\Tiptap\Node $contentItem */
+        foreach ($this->document as $contentItem) {
+            $contentItemType = $contentItem->type()->value;
+
+            if (! isset($count[$contentItemType])) {
+                $count[$contentItemType] = 1;
+            } else {
+                $count[$contentItemType] = ++$count[$contentItemType];
+            }
+        }
+
+        return $count;
     }
 
     public static function fromContent(array|string $content): static
