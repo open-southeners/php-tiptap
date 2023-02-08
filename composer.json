@@ -1,6 +1,6 @@
 {
-    "name": "packagist_package_here",
-    "description": "and_description_here",
+    "name": "open-southeners/tiptap",
+    "description": "Extract or analyse content from Tiptap generated JSON using PHP",
     "license": "MIT",
     "keywords": [
         "open-southeners"
@@ -12,30 +12,22 @@
         }
     ],
     "require": {
-        "php": "^7.2|^8.0|^8.1"
+        "php": "^8.0|^8.1|^8.2",
+        "open-southeners/laravel-helpers": "^0.9"
     },
     "require-dev": {
-        "nunomaduro/larastan": "^1.0",
         "phpstan/phpstan": "^1.0",
-        "friendsofphp/php-cs-fixer": "^3.0",
-        "phpunit/phpunit": "^7.0|^9.0",
-        "orchestra/testbench": "^4.0|^6.0|^7.0"
+        "laravel/pint": "^1.0",
+        "phpunit/phpunit": "^7.0|^9.0"
     },
     "autoload": {
         "psr-4": {
-            "OpenSoutheners\\PhpPackage\\": "src",
-            "OpenSoutheners\\PhpPackage\\Tests\\": "tests"
+            "OpenSoutheners\\Tiptap\\": "src",
+            "OpenSoutheners\\Tiptap\\Tests\\": "tests"
         }
     },
     "config": {
         "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "OpenSoutheners\\PhpPackage\\JsonApiServiceProvider"
-            ]
-        }
     },
     "minimum-stability": "dev"
 }

@@ -1,16 +1,8 @@
 <?php
 
-namespace OpenSoutheners\PhpPackage\Tests;
+namespace OpenSoutheners\Tiptap\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
-use OpenSoutheners\PhpPackage\ServiceProvider;
-
-abstract class TestCase extends Orchestra
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    protected function getPackageProviders($app)
-    {
-        return [
-            ServiceProvider::class,
-        ];
-    }
+    // 
 }
